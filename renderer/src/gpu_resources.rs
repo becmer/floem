@@ -51,10 +51,12 @@ impl GpuResources {
         backends: Option<Backends>,
         window: Arc<dyn Window>,
     ) -> Receiver<Result<(Self, wgpu::Surface<'static>), GpuResourceError>> {
-        let instance = wgpu::Instance::new(&wgpu::InstanceDescriptor {
+        let instance = wgpu::Instance::new(wgpu::InstanceDescriptor {
             backends: Backends::from_env().or(backends).unwrap_or(Backends::all()),
             flags: InstanceFlags::from_env_or_default(),
-            ..Default::default()
+            memory_budget_thresholds: Default::default(),
+            backend_options: Default::default(),
+            display: None,
         });
         // Channel passing to do async out-of-band within the winit event_loop since wasm can't
         // execute futures with a return value

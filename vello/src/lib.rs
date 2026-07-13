@@ -428,8 +428,9 @@ impl Renderer for VelloRenderer {
             self.render_capture_image()
         } else {
             let surface_texture = match self.surface.surface.get_current_texture() {
-                Ok(surface_texture) => surface_texture,
-                Err(wgpu::SurfaceError::Lost | wgpu::SurfaceError::Outdated) => {
+                wgpu::CurrentSurfaceTexture::Success(surface_texture)
+                | wgpu::CurrentSurfaceTexture::Suboptimal(surface_texture) => surface_texture,
+                wgpu::CurrentSurfaceTexture::Lost | wgpu::CurrentSurfaceTexture::Outdated => {
                     self.surface
                         .surface
                         .configure(&self.device, &self.surface.config);

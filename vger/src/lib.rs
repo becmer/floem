@@ -711,8 +711,9 @@ impl Renderer for VgerRenderer {
             self.render_image()
         } else {
             let frame = match self.surface.get_current_texture() {
-                Ok(frame) => frame,
-                Err(wgpu::SurfaceError::Lost | wgpu::SurfaceError::Outdated) => {
+                wgpu::CurrentSurfaceTexture::Success(frame)
+                | wgpu::CurrentSurfaceTexture::Suboptimal(frame) => frame,
+                wgpu::CurrentSurfaceTexture::Lost | wgpu::CurrentSurfaceTexture::Outdated => {
                     self.surface.configure(&self.device, &self.config);
                     return None;
                 }
@@ -735,6 +736,7 @@ impl Renderer for VgerRenderer {
                 depth_stencil_attachment: None,
                 timestamp_writes: None,
                 occlusion_query_set: None,
+                multiview_mask: None,
             };
 
             self.vger.encode(&desc);

@@ -55,10 +55,10 @@ strum_macros = { version = "0.28" }
 # Image format features are defined via new features
 image = { version = "0.25", default-features = false }
 imbl = "7.0"
-resvg = { version = "0.46" }
+resvg = { version = "0.47" }
 raw-window-handle = "0.6.0"
 unicode-segmentation = "1.10"
-wgpu = { version = "27.0" }
+wgpu = { version = "29.0" }
 parking_lot = { version = "0.12" }
 swash = { version = "0.2" }
 muda = { version = "0.17.1", default-features = false }

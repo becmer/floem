@@ -8,7 +8,7 @@ license.workspace = true
 
 [dependencies.floem-vger-rs]
 git = "https://github.com/lapce/vger-rs"
-rev = "54ab8135d9d870a4ac2b84fc6b9846b3b03ec919"
+rev = "fd9128313f8c4184d6b8ecacd4b3dc89a07e6008"
 package = "floem-vger"
 
 [dependencies]

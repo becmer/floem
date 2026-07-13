@@ -1662,13 +1662,13 @@ fn brush_to_paint<'b>(brush: impl Into<BrushRef<'b>>) -> Option<Paint<'static>> 
                 )?,
                 GradientKind::Radial(RadialGradientPosition {
                     start_center,
-                    start_radius: _,
+                    start_radius,
                     end_center,
                     end_radius,
                 }) => {
-                    // FIXME: Doesn't use `start_radius`
                     RadialGradient::new(
                         to_point(start_center),
+                        start_radius,
                         to_point(end_center),
                         end_radius,
                         stops,
